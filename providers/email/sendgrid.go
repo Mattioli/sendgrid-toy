@@ -1,6 +1,7 @@
 package providers
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -15,17 +16,15 @@ func NewSendGridProvider() *SendgridProvider {
 	return &SendgridProvider{}
 }
 
-func (s *SendgridProvider) Send(fromName, fromEmail, toName, toEmail, subject, msg string) error {
-	from := mail.NewEmail(fromName, fromEmail)
-	to := mail.NewEmail(toName, toEmail)
-
-	plainTextContent := msg
-	htmlContent := "<strong>" + msg + "</strong>"
-
-	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+func (s *SendgridProvider) Send(data json.RawMessage) error {
+	m := mail.NewV3Mail()
+	err := json.Unmarshal(data, &m)
+	if err != nil {
+		return fmt.Errorf("could not unwrap json in sendgrid provider: %w", err)
+	}
 
 	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
-	response, err := client.Send(message)
+	response, err := client.Send(m)
 
 	if err != nil {
 		log.Println(err)

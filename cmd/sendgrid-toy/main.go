@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 
 	providers "github.com/Mattioli/sendgrid-toy/providers/email"
 	"github.com/spf13/cobra"
@@ -22,32 +25,29 @@ func main() {
 }
 
 func run(cmd *cobra.Command, args []string) error {
-	if len(args) != 7 {
-		fmt.Println("You need to pass 6 parameters, in this order: [fromName] [fromEmail] [toName] [toEmail] [subject] [msg]")
-		return fmt.Errorf("wrong number of parameters: expected 6, received %d", len(args)-1)
+	p := providers.NewSendGridProvider()
+
+	jsonFile, err := os.Open("parameters.json")
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	fromName := args[1]
-	fromEmail := args[2]
-	toName := args[3]
-	toEmail := args[4]
-	subject := args[5]
-	msg := args[6]
+	defer jsonFile.Close()
 
-	p := initEmailProviders()
+	fmt.Println("Successfully Opened parameters.json")
 
-	for _, v := range p {
-		err := v.Send(fromName, fromEmail, toName, toEmail, subject, msg)
-		if err != nil {
-			fmt.Println("Error sending email!")
-			return err
-		}
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("read content: %s\n", string(byteValue))
+
+	err = p.Send(byteValue)
+	if err != nil {
+		fmt.Println("Error sending email!")
+		return err
 	}
 
 	return nil
-}
-
-func initEmailProviders() []providers.EmailProvider {
-	result := []providers.EmailProvider{providers.NewSendGridProvider()}
-	return result
 }

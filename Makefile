@@ -1,8 +1,5 @@
 .PHONY: send
 send:
-	go run cmd/sendgrid-toy/main.go send $(fromName) $(fromEmail) $(toName) $(toEmail) $(subject) $(msg)
+	go run cmd/sendgrid-toy/main.go send
 
-.PHONY:
-prt:
-	@echo argument is $(fromEmail) $(fromName)
 

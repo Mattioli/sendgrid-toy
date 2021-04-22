@@ -1,0 +1,69 @@
+{
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": "lol@gmail.com",
+          "name": "Lol"
+        },
+        {
+          "email": "ynabynuecoemeeofah@mhzayt.online",
+          "name": "Arnaldo"
+        }
+      ]
+    }
+  ],
+  "from": {
+    "email": "andrade@live.com",
+    "name": "Andrade"
+  },
+  "subject": "Your Example Order Confirmation",
+  "content": [
+    {
+      "type": "text/html",
+      "value": "<p>Hello from Twilio SendGrid!</p><p>Sending with the email service trusted by developers and marketers for <strong>time-savings</strong>, <strong>scalability</strong>, and <strong>delivery expertise</strong>.</p><p>%open-track%</p>"
+    }
+  ],
+  "attachments": [
+    {
+      "content": "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICAgICAgPG1ldGEgaHR0cC1lcXVpdj0iWC1VQS1Db21wYXRpYmxlIiBjb250ZW50PSJJRT1lZGdlIj4KICAgICAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICAgICAgPHRpdGxlPkRvY3VtZW50PC90aXRsZT4KICAgIDwvaGVhZD4KCiAgICA8Ym9keT4KCiAgICA8L2JvZHk+Cgo8L2h0bWw+Cg==",
+      "filename": "index.html",
+      "type": "text/html",
+      "disposition": "attachment"
+    }
+  ],
+  "categories": [
+    "cake",
+    "pie",
+    "baking"
+  ],
+  "mail_settings": {
+    "bypass_list_management": {
+      "enable": false
+    },
+    "footer": {
+      "enable": false
+    },
+    "sandbox_mode": {
+      "enable": false
+    },
+    "spam_check": {
+      "enable": true,
+      "threshold": 2,
+      "post_to_url": "https://example.com/"
+    }
+  },
+  "tracking_settings": {
+    "click_tracking": {
+      "enable": true,
+      "enable_text": false
+    },
+    "open_tracking": {
+      "enable": true,
+      "substitution_tag": "%open-track%"
+    },
+    "subscription_tracking": {
+      "enable": false
+    }
+  }
+}
